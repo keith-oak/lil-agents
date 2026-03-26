@@ -137,9 +137,9 @@ class WalkerCharacter {
         terminalView?.inputField.isEditable = false
         terminalView?.inputField.placeholderString = ""
         let welcome = """
-        greetings! we're R2-D2 and C-3PO — your lil dock droids.
+        greetings! we're R2-Do2, C-3POa, and BB-Gr8 — your lil dock droids.
 
-        click either of us to open a Claude AI chat. we'll patrol the dock while you work and let you know when the Force is computing.
+        click any of us to open a Claude AI chat. we'll patrol the dock while you work and let you know when the Force is computing.
 
         check the menu bar icon (top right) for themes, sounds, and more options.
 
@@ -280,8 +280,8 @@ class WalkerCharacter {
 
     func createPopoverWindow() {
         let t = resolvedTheme
-        let popoverWidth: CGFloat = 420
-        let popoverHeight: CGFloat = 310
+        let popoverWidth: CGFloat = 520
+        let popoverHeight: CGFloat = 360
 
         let win = KeyableWindow(
             contentRect: CGRect(x: 0, y: 0, width: popoverWidth, height: popoverHeight),

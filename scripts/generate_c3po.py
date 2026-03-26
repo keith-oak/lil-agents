@@ -134,31 +134,31 @@ def draw_c3po(draw, frame):
      left_arm_ang, right_arm_ang, head_tilt, torso_twist) = get_animation_params(frame)
 
     cx = WIDTH // 2
-    base_y = 1420  # bottom of feet when standing
+    base_y = HEIGHT  # feet at the very bottom of the canvas (y=1920)
 
-    # --- Character dimensions ---
-    head_w = 140
-    head_h = 130
-    neck_w = 60
-    neck_h = 50
-    torso_w = 200
-    torso_h = 200
-    upper_arm_w = 50
-    upper_arm_h = 130
-    lower_arm_w = 45
-    lower_arm_h = 120
-    upper_leg_w = 60
-    upper_leg_h = 140
-    lower_leg_w = 55
-    lower_leg_h = 130
-    foot_w = 80
-    foot_h = 36
-    hip_spacing = 55
-    shoulder_spacing = 110
+    # --- Character dimensions (scaled up ~1.56x for ~900px tall) ---
+    head_w = 218
+    head_h = 203
+    neck_w = 94
+    neck_h = 78
+    torso_w = 312
+    torso_h = 312
+    upper_arm_w = 78
+    upper_arm_h = 203
+    lower_arm_w = 70
+    lower_arm_h = 187
+    upper_leg_w = 94
+    upper_leg_h = 218
+    lower_leg_w = 86
+    lower_leg_h = 203
+    foot_w = 125
+    foot_h = 56
+    hip_spacing = 86
+    shoulder_spacing = 172
 
-    # Character total height ~580px
-    total_h = head_h + neck_h + torso_h + upper_leg_h + lower_leg_h + foot_h - 60
-    _ = total_h  # ~576px
+    # Character total height ~900px
+    total_h = head_h + neck_h + torso_h + upper_leg_h + lower_leg_h + foot_h - 94
+    _ = total_h  # ~903px
 
     # Key Y positions (from bottom up)
     feet_y = base_y

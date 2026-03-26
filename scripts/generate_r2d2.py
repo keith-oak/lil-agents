@@ -46,8 +46,8 @@ def get_animation_params(frame):
 
     if frame < 72:
         # Idle: gentle dome wobble, slight body bob
-        bob = math.sin(frame * 0.1) * 3
-        dome_wobble = math.sin(frame * 0.08) * 3
+        bob = math.sin(frame * 0.1) * 4
+        dome_wobble = math.sin(frame * 0.08) * 4
         return 0, bob, 0, 0, 0, dome_wobble
 
     elif frame < 90:
@@ -57,13 +57,13 @@ def get_animation_params(frame):
         cycle = (frame - 72) * 0.2
         sc = math.sin(cycle)
 
-        body_x = sc * 30 * ease
+        body_x = sc * 38 * ease
         tilt = sc * 12 * ease
         # Opposite leg lifts when body tilts that way
-        left_lift = max(0, sc) * 30 * ease
-        right_lift = max(0, -sc) * 30 * ease
-        body_y = -abs(sc) * 8 * ease
-        dome_wobble = math.sin(frame * 0.12) * 4 * ease
+        left_lift = max(0, sc) * 38 * ease
+        right_lift = max(0, -sc) * 38 * ease
+        body_y = -abs(sc) * 10 * ease
+        dome_wobble = math.sin(frame * 0.12) * 5 * ease
         return body_x, body_y, tilt, left_lift, right_lift, dome_wobble
 
     elif frame < 192:
@@ -71,12 +71,12 @@ def get_animation_params(frame):
         cycle = (frame - 90) * 0.22
         sc = math.sin(cycle)
 
-        body_x = sc * 35
+        body_x = sc * 44
         tilt = sc * 14
-        left_lift = max(0, sc) * 40      # left leg lifts when leaning right
-        right_lift = max(0, -sc) * 40     # right leg lifts when leaning left
-        body_y = -abs(sc) * 10
-        dome_wobble = math.sin(frame * 0.15 + 0.5) * 5
+        left_lift = max(0, sc) * 50      # left leg lifts when leaning right
+        right_lift = max(0, -sc) * 50     # right leg lifts when leaning left
+        body_y = -abs(sc) * 12
+        dome_wobble = math.sin(frame * 0.15 + 0.5) * 6
         return body_x, body_y, tilt, left_lift, right_lift, dome_wobble
 
     elif frame < 204:
@@ -86,20 +86,20 @@ def get_animation_params(frame):
         cycle = (frame - 192) * 0.2
         sc = math.sin(cycle)
 
-        body_x = sc * 30 * ease
+        body_x = sc * 38 * ease
         tilt = sc * 12 * ease
-        left_lift = max(0, sc) * 30 * ease
-        right_lift = max(0, -sc) * 30 * ease
-        body_y = -abs(sc) * 8 * ease
-        dome_wobble = math.sin(frame * 0.1) * 3 * ease
+        left_lift = max(0, sc) * 38 * ease
+        right_lift = max(0, -sc) * 38 * ease
+        body_y = -abs(sc) * 10 * ease
+        dome_wobble = math.sin(frame * 0.1) * 4 * ease
         return body_x, body_y, tilt, left_lift, right_lift, dome_wobble
 
     else:
         # Return to idle
         t = min(1.0, (frame - 204) / 36.0)
         ease = 1.0 - t
-        bob = math.sin(frame * 0.1) * 3 * ease
-        dome_wobble = math.sin(frame * 0.08) * 2 * (1 - t)
+        bob = math.sin(frame * 0.1) * 4 * ease
+        dome_wobble = math.sin(frame * 0.08) * 3 * (1 - t)
         return 0, bob, 0, 0, 0, dome_wobble
 
 
@@ -110,27 +110,27 @@ def draw_r2d2(draw, frame):
     )
 
     cx = WIDTH // 2
-    base_y = 1300  # bottom of feet when standing
+    base_y = 1920  # feet touch the very bottom of the canvas
 
-    # --- Dimensions ---
-    body_w = 220
-    body_h = 240
-    leg_w = 60
-    leg_h = 180
-    foot_w = 80
-    foot_h = 40
-    leg_spacing = 150
-    centre_leg_w = 40
-    centre_leg_h = 130
-    centre_foot_w = 60
-    centre_foot_h = 30
-    dome_w = 220
-    dome_h = 150
+    # --- Dimensions (scaled up ~1.25x for visibility) ---
+    body_w = 280
+    body_h = 300
+    leg_w = 76
+    leg_h = 226
+    foot_w = 100
+    foot_h = 50
+    leg_spacing = 190
+    centre_leg_w = 50
+    centre_leg_h = 164
+    centre_foot_w = 76
+    centre_foot_h = 38
+    dome_w = 280
+    dome_h = 190
 
     # Key Y positions
     feet_bottom = base_y
     leg_top = feet_bottom - foot_h - leg_h
-    body_top = leg_top - body_h + 50  # overlap legs slightly
+    body_top = leg_top - body_h + 62  # overlap legs slightly (scaled)
     body_bottom = body_top + body_h
 
     # Apply body offsets
@@ -138,16 +138,17 @@ def draw_r2d2(draw, frame):
     body_top_anim = body_top + int(body_y_off)
 
     # --- Draw shadow on ground ---
-    shadow_w = 300 + int(abs(body_x_off) * 0.5)
-    shadow_h = 20
+    shadow_w = 380 + int(abs(body_x_off) * 0.5)
+    shadow_h = 24
     sx = snap(cx - shadow_w // 2 + body_x_off * 0.3)
-    sy = snap(base_y + 10)
+    sy = snap(base_y - shadow_h)  # shadow just above canvas bottom
     draw.rectangle([sx, sy, sx + shadow_w, sy + shadow_h], fill=SHADOW)
 
     # === LEGS (drawn first, behind body) ===
+    # Legs follow the body's horizontal offset so they stay attached
 
     # Left leg
-    ll_cx = cx - leg_spacing
+    ll_cx = bcx - leg_spacing
     ll_lift = int(left_lift)
     ll_top = snap(leg_top + ll_lift)
     ll_bot = snap(feet_bottom - foot_h + ll_lift)
@@ -163,7 +164,7 @@ def draw_r2d2(draw, frame):
     draw_rect(draw, ll_cx - foot_w // 2, ll_bot, foot_w, foot_h, FOOT_SILVER, OUTLINE)
 
     # Right leg
-    rl_cx = cx + leg_spacing
+    rl_cx = bcx + leg_spacing
     rl_lift = int(right_lift)
     rl_top = snap(leg_top + rl_lift)
     rl_bot = snap(feet_bottom - foot_h + rl_lift)
@@ -179,7 +180,7 @@ def draw_r2d2(draw, frame):
     draw_rect(draw, rl_cx - foot_w // 2, rl_bot, foot_w, foot_h, FOOT_SILVER, OUTLINE)
 
     # Centre leg
-    cl_top = snap(body_top_anim + body_h - 40)
+    cl_top = snap(body_top_anim + body_h - 50)
     draw_rect(draw, bcx - centre_leg_w // 2, cl_top, centre_leg_w, centre_leg_h,
               LEG_DARK, OUTLINE)
     # Centre foot
@@ -207,10 +208,10 @@ def draw_r2d2(draw, frame):
                         fill=(0, 0, 0, 0))
 
     # Blue front panel (large)
-    panel_w = 140
-    panel_h = 100
+    panel_w = 176
+    panel_h = 126
     px = snap(bcx - panel_w // 2)
-    py = snap(by + 60)
+    py = snap(by + 76)
     draw_rect(draw, px, py, panel_w, panel_h, BLUE_PANEL)
     # Panel border lines
     draw_rect(draw, px, py, panel_w, PIXEL, DETAIL_DARK)
@@ -223,19 +224,19 @@ def draw_r2d2(draw, frame):
               panel_w - 4 * PIXEL, panel_h - 4 * PIXEL, BLUE_PANEL_LIGHT)
 
     # Lower blue accent bars
-    for i, yoff in enumerate([180, 200]):
-        apw = 80 if i == 0 else 100
+    for i, yoff in enumerate([226, 252]):
+        apw = 100 if i == 0 else 126
         draw_rect(draw, snap(bcx - apw // 2), snap(by + yoff), apw, PIXEL, BLUE_PANEL)
 
     # Side utility panels (small blue squares on each side of body)
     for side in [-1, 1]:
         sp_x = snap(bcx + side * (body_w // 2 - 3 * PIXEL))
-        draw_rect(draw, sp_x, snap(by + 80), 2 * PIXEL, 2 * PIXEL, BLUE_PANEL)
-        draw_rect(draw, sp_x, snap(by + 140), 2 * PIXEL, PIXEL, DETAIL_DARK)
+        draw_rect(draw, sp_x, snap(by + 100), 2 * PIXEL, 2 * PIXEL, BLUE_PANEL)
+        draw_rect(draw, sp_x, snap(by + 176), 2 * PIXEL, PIXEL, DETAIL_DARK)
 
     # Vent lines
-    for yoff in [170, 225]:
-        for xoff in range(-60, 61, PIXEL):
+    for yoff in [214, 282]:
+        for xoff in range(-76, 77, PIXEL):
             draw.rectangle(
                 [snap(bcx + xoff), snap(by + yoff),
                  snap(bcx + xoff) + PIXEL - 1, snap(by + yoff) + 3],
@@ -303,12 +304,12 @@ def draw_r2d2(draw, frame):
     )
 
     # Secondary lens (smaller, offset right)
-    se_x = snap(dome_cx + 60 + int(dome_wobble * 0.4))
+    se_x = snap(dome_cx + 76 + int(dome_wobble * 0.4))
     se_y = snap(dome_base_y - dome_h * 0.42)
     draw_rect(draw, se_x, se_y, PIXEL, PIXEL, (50, 50, 60))
 
     # Third indicator light (left side)
-    tl_x = snap(dome_cx - 50 + int(dome_wobble * 0.4))
+    tl_x = snap(dome_cx - 64 + int(dome_wobble * 0.4))
     tl_y = snap(dome_base_y - dome_h * 0.38)
     draw_rect(draw, tl_x, tl_y, PIXEL, PIXEL, BLUE_PANEL_LIGHT)
 

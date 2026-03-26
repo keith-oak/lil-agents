@@ -132,8 +132,8 @@ class TerminalView: NSView {
         paddedCell.textColor = t.textPrimary
         paddedCell.drawsBackground = false
         paddedCell.isBezeled = false
-        paddedCell.fieldBackgroundColor = nil
-        paddedCell.fieldCornerRadius = 0
+        paddedCell.fieldBackgroundColor = t.inputBg.blended(withFraction: 0.3, of: t.popoverBg) ?? t.inputBg
+        paddedCell.fieldCornerRadius = t.inputCornerRadius
         paddedCell.placeholderAttributedString = NSAttributedString(
             string: "Use the Force...",
             attributes: [.font: t.font, .foregroundColor: t.textDim]

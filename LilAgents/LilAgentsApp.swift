@@ -37,13 +37,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         let menu = NSMenu()
 
-        let char1Item = NSMenuItem(title: "R2-D2", action: #selector(toggleChar1), keyEquivalent: "1")
+        let char1Item = NSMenuItem(title: "R2-Do2", action: #selector(toggleChar1), keyEquivalent: "1")
         char1Item.state = .on
         menu.addItem(char1Item)
 
-        let char2Item = NSMenuItem(title: "C-3PO", action: #selector(toggleChar2), keyEquivalent: "2")
+        let char2Item = NSMenuItem(title: "C-3POa", action: #selector(toggleChar2), keyEquivalent: "2")
         char2Item.state = .on
         menu.addItem(char2Item)
+
+        let char3Item = NSMenuItem(title: "BB-Gr8", action: #selector(toggleChar3), keyEquivalent: "3")
+        char3Item.state = .on
+        menu.addItem(char3Item)
 
         menu.addItem(NSMenuItem.separator())
 
@@ -157,6 +161,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func toggleChar2(_ sender: NSMenuItem) {
         guard let chars = controller?.characters, chars.count > 1 else { return }
         let char = chars[1]
+        if char.window.isVisible {
+            char.window.orderOut(nil)
+            char.queuePlayer.pause()
+            sender.state = .off
+        } else {
+            char.window.orderFrontRegardless()
+            sender.state = .on
+        }
+    }
+
+    @objc func toggleChar3(_ sender: NSMenuItem) {
+        guard let chars = controller?.characters, chars.count > 2 else { return }
+        let char = chars[2]
         if char.window.isVisible {
             char.window.orderOut(nil)
             char.queuePlayer.pause()
