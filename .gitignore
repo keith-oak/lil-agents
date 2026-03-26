@@ -25,3 +25,6 @@ xcuserdata/
 *.dmg
 *.zip
 *.xcworkspace/xcshareddata/swiftpm/
+
+# Generated animation frames
+scripts/frames_*/
