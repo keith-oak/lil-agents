@@ -8,14 +8,14 @@ class LilAgentsController {
     private static let onboardingKey = "hasCompletedOnboarding"
 
     func start() {
-        let char1 = WalkerCharacter(videoName: "walk-bruce-01")
+        let char1 = WalkerCharacter(videoName: "walk-r2d2-01")
         char1.accelStart = 3.0
         char1.fullSpeedStart = 3.75
         char1.decelStart = 8.0
         char1.walkStop = 8.5
         char1.walkAmountRange = 0.4...0.65
 
-        let char2 = WalkerCharacter(videoName: "walk-jazz-01")
+        let char2 = WalkerCharacter(videoName: "walk-c3po-01")
         char2.accelStart = 3.9
         char2.fullSpeedStart = 4.5
         char2.decelStart = 8.0
@@ -23,8 +23,8 @@ class LilAgentsController {
         char2.walkAmountRange = 0.35...0.6
         char1.yOffset = -3
         char2.yOffset = -7
-        char1.characterColor = NSColor(red: 0.4, green: 0.72, blue: 0.55, alpha: 1.0)
-        char2.characterColor = NSColor(red: 1.0, green: 0.4, blue: 0.0, alpha: 1.0)
+        char1.characterColor = NSColor(red: 0.2, green: 0.5, blue: 0.85, alpha: 1.0)  // R2-D2 blue
+        char2.characterColor = NSColor(red: 0.85, green: 0.72, blue: 0.2, alpha: 1.0)  // C-3PO gold
 
         char1.flipXOffset = 0
         char2.flipXOffset = -9
@@ -50,15 +50,15 @@ class LilAgentsController {
     }
 
     private func triggerOnboarding() {
-        guard let bruce = characters.first else { return }
-        bruce.isOnboarding = true
-        // Show "hi!" bubble after a short delay so the character is visible first
+        guard let artoo = characters.first else { return }
+        artoo.isOnboarding = true
+        // Show greeting bubble after a short delay so the character is visible first
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            bruce.currentPhrase = "hi!"
-            bruce.showingCompletion = true
-            bruce.completionBubbleExpiry = CACurrentMediaTime() + 600 // stays until clicked
-            bruce.showBubble(text: "hi!", isCompletion: true)
-            bruce.playCompletionSound()
+            artoo.currentPhrase = "beep boop!"
+            artoo.showingCompletion = true
+            artoo.completionBubbleExpiry = CACurrentMediaTime() + 600 // stays until clicked
+            artoo.showBubble(text: "beep boop!", isCompletion: true)
+            artoo.playCompletionSound()
         }
     }
 

@@ -34,7 +34,7 @@ struct PopoverTheme {
     // MARK: - Presets
 
     static let teenageEngineering = PopoverTheme(
-        name: "Midnight",
+        name: "Dark Side",
         popoverBg: NSColor(red: 0.07, green: 0.07, blue: 0.07, alpha: 0.96),
         popoverBorder: NSColor(red: 1.0, green: 0.4, blue: 0.0, alpha: 0.7),
         popoverBorderWidth: 1.5,
@@ -42,7 +42,7 @@ struct PopoverTheme {
         titleBarBg: NSColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1.0),
         titleText: NSColor(red: 1.0, green: 0.4, blue: 0.0, alpha: 1.0),
         titleFont: NSFont(name: "SFMono-Bold", size: 10) ?? .monospacedSystemFont(ofSize: 10, weight: .bold),
-        titleString: "CLAUDE",
+        titleString: "IMPERIAL TERMINAL",
         separatorColor: NSColor(red: 1.0, green: 0.4, blue: 0.0, alpha: 0.3),
         font: NSFont(name: "SFMono-Regular", size: 11.5) ?? .monospacedSystemFont(ofSize: 11.5, weight: .regular),
         fontBold: NSFont(name: "SFMono-Medium", size: 11.5) ?? .monospacedSystemFont(ofSize: 11.5, weight: .medium),
@@ -63,7 +63,7 @@ struct PopoverTheme {
     )
 
     static let playful = PopoverTheme(
-        name: "Peach",
+        name: "Tatooine",
         popoverBg: NSColor(red: 1.0, green: 0.97, blue: 0.92, alpha: 0.97),
         popoverBorder: NSColor(red: 0.95, green: 0.55, blue: 0.65, alpha: 0.8),
         popoverBorderWidth: 2.5,
@@ -71,7 +71,7 @@ struct PopoverTheme {
         titleBarBg: NSColor(red: 0.98, green: 0.93, blue: 0.88, alpha: 1.0),
         titleText: NSColor(red: 0.85, green: 0.35, blue: 0.45, alpha: 1.0),
         titleFont: .systemFont(ofSize: 12, weight: .heavy),
-        titleString: "claude ~",
+        titleString: "mos eisley ~",
         separatorColor: NSColor(red: 0.95, green: 0.55, blue: 0.65, alpha: 0.25),
         font: .systemFont(ofSize: 12, weight: .regular),
         fontBold: .systemFont(ofSize: 12, weight: .semibold),
@@ -92,7 +92,7 @@ struct PopoverTheme {
     )
 
     static let wii = PopoverTheme(
-        name: "Cloud",
+        name: "Rebel Base",
         popoverBg: NSColor(red: 0.94, green: 0.95, blue: 0.96, alpha: 0.98),
         popoverBorder: NSColor(red: 0.78, green: 0.80, blue: 0.84, alpha: 0.6),
         popoverBorderWidth: 1,
@@ -100,7 +100,7 @@ struct PopoverTheme {
         titleBarBg: NSColor(red: 0.88, green: 0.90, blue: 0.93, alpha: 1.0),
         titleText: NSColor(red: 0.3, green: 0.3, blue: 0.35, alpha: 1.0),
         titleFont: .systemFont(ofSize: 12, weight: .semibold),
-        titleString: "claude ~",
+        titleString: "echo base ~",
         separatorColor: NSColor(red: 0.8, green: 0.82, blue: 0.85, alpha: 0.4),
         font: .systemFont(ofSize: 12, weight: .regular),
         fontBold: .systemFont(ofSize: 12, weight: .semibold),
@@ -121,7 +121,7 @@ struct PopoverTheme {
     )
 
     static let iPod = PopoverTheme(
-        name: "Moss",
+        name: "Dagobah",
         popoverBg: NSColor(red: 0.82, green: 0.84, blue: 0.78, alpha: 0.98),
         popoverBorder: NSColor(red: 0.55, green: 0.58, blue: 0.50, alpha: 0.8),
         popoverBorderWidth: 2,
@@ -129,7 +129,7 @@ struct PopoverTheme {
         titleBarBg: NSColor(red: 0.72, green: 0.75, blue: 0.68, alpha: 1.0),
         titleText: NSColor(red: 0.15, green: 0.17, blue: 0.12, alpha: 1.0),
         titleFont: NSFont(name: "Chicago", size: 11) ?? .systemFont(ofSize: 11, weight: .bold),
-        titleString: "Claude",
+        titleString: "Yoda's Hut",
         separatorColor: NSColor(red: 0.55, green: 0.58, blue: 0.50, alpha: 0.5),
         font: NSFont(name: "Geneva", size: 11) ?? .monospacedSystemFont(ofSize: 11, weight: .regular),
         fontBold: NSFont(name: "Geneva", size: 11) ?? .monospacedSystemFont(ofSize: 11, weight: .bold),
@@ -157,7 +157,7 @@ struct PopoverTheme {
     // MARK: - Theme Modifiers
 
     func withCharacterColor(_ color: NSColor) -> PopoverTheme {
-        guard name == "Peach" else { return self }
+        guard name == "Tatooine" else { return self }
         let r = color.redComponent, g = color.greenComponent, b = color.blueComponent
         let light = NSColor(red: min(r + 0.4, 1), green: min(g + 0.4, 1), blue: min(b + 0.4, 1), alpha: 0.25)
         let border = NSColor(red: r, green: g, blue: b, alpha: 0.6)
@@ -183,7 +183,7 @@ struct PopoverTheme {
 
     func withCustomFont() -> PopoverTheme {
         // Midnight uses its own mono font — don't override
-        guard name != "Midnight" else { return self }
+        guard name != "Dark Side" else { return self }
         guard let fontName = PopoverTheme.customFontName,
               let baseFont = NSFont(name: fontName, size: PopoverTheme.customFontSize) else { return self }
         let boldFont = NSFontManager.shared.convert(baseFont, toHaveTrait: .boldFontMask)

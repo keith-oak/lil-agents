@@ -135,7 +135,7 @@ class TerminalView: NSView {
         paddedCell.fieldBackgroundColor = nil
         paddedCell.fieldCornerRadius = 0
         paddedCell.placeholderAttributedString = NSAttributedString(
-            string: "Ask Claude...",
+            string: "Use the Force...",
             attributes: [.font: t.font, .foregroundColor: t.textDim]
         )
         inputField.cell = paddedCell

@@ -137,13 +137,13 @@ class WalkerCharacter {
         terminalView?.inputField.isEditable = false
         terminalView?.inputField.placeholderString = ""
         let welcome = """
-        hey! we're bruce and jazz — your lil dock agents.
+        greetings! we're R2-D2 and C-3PO — your lil dock droids.
 
-        click either of us to open a Claude AI chat. we'll walk around while you work and let you know when Claude's thinking.
+        click either of us to open a Claude AI chat. we'll patrol the dock while you work and let you know when the Force is computing.
 
         check the menu bar icon (top right) for themes, sounds, and more options.
 
-        click anywhere outside to dismiss, then click us again to start chatting.
+        click anywhere outside to dismiss, then click us again to start chatting. may the Force be with you!
         """
         terminalView?.appendStreamingText(welcome)
         terminalView?.endStreaming()
@@ -394,16 +394,16 @@ class WalkerCharacter {
     // MARK: - Thinking Bubble
 
     private static let thinkingPhrases = [
-        "hmm...", "thinking...", "one sec...", "ok hold on",
-        "let me check", "working on it", "almost...", "bear with me",
-        "on it!", "gimme a sec", "brb", "processing...",
-        "hang tight", "just a moment", "figuring it out",
-        "crunching...", "reading...", "looking..."
+        "boop beep...", "searching feelings...", "consulting the Force...", "hold on...",
+        "recalculating hyperspace...", "scanning...", "almost there...", "patience you must have",
+        "on it, master!", "standby...", "computing...", "processing...",
+        "stay on target...", "one moment...", "the Force is strong...",
+        "beep bwoop...", "accessing archives...", "calculating odds..."
     ]
 
     private static let completionPhrases = [
-        "done!", "all set!", "ready!", "here you go", "got it!",
-        "finished!", "ta-da!", "voila!"
+        "the Force is with you!", "mission complete!", "ready, master!", "these are the droids!",
+        "done it is!", "I have a good feeling!", "roger roger!", "may the Force..."
     ]
 
     private var lastPhraseUpdate: CFTimeInterval = 0
